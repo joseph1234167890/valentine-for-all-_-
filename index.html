@@ -18,21 +18,21 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0); /* awalnya kecil */
       cursor: pointer;
       z-index: 100;
       opacity: 0;
-      transition: opacity 1s ease;
+      transition: all 0.6s ease; /* fade + scale */
     }
 
     /* Gambar tambahan */
     #gambar3, #gambar4 {
       position: fixed;
-      width: 100px; /* Bisa disesuaikan */
+      width: 100px;
       cursor: pointer;
-      display: none; /* Awalnya hidden */
+      display: none;
       opacity: 0;
-      transition: opacity 1s ease;
+      transition: opacity 0.6s ease;
       z-index: 100;
     }
 
@@ -61,9 +61,12 @@
     const gambar3 = document.getElementById('gambar3');
     const gambar4 = document.getElementById('gambar4');
 
-    // Fade-in popup saat halaman dibuka
+    // Pop-up muncul dengan efek scale + fade
     window.onload = () => {
-      popup.style.opacity = 1;
+      setTimeout(() => {
+        popup.style.transform = 'translate(-50%, -50%) scale(1)';
+        popup.style.opacity = '1';
+      }, 300); // delay kecil supaya keliatan smooth
     };
 
     popup.addEventListener('click', () => {
@@ -74,9 +77,9 @@
       gambar3.style.display = 'block';
       gambar4.style.display = 'block';
       setTimeout(() => {
-        gambar3.style.opacity = 1;
-        gambar4.style.opacity = 1;
-      }, 50); // delay kecil supaya transisi jalan
+        gambar3.style.opacity = '1';
+        gambar4.style.opacity = '1';
+      }, 50);
     });
   </script>
 </body>
