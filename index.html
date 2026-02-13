@@ -54,42 +54,42 @@
     const gambar3 = document.getElementById('gambar3');
     const gambar4 = document.getElementById('gambar4');
 
-    // Fungsi untuk muncul dengan pop-up
+    // Fungsi pop-up muncul (scale + fade)
     function showPopup(img) {
       img.style.display = 'block';
       setTimeout(() => {
         img.style.opacity = '1';
-        img.style.transform = img.id === 'popup' 
-          ? 'translate(-50%, -50%) scale(1)' 
+        img.style.transform = img.id === 'popup'
+          ? 'translate(-50%, -50%) scale(1)'
           : 'scale(1)';
       }, 50);
     }
 
-    // Fungsi untuk hilang dengan pop-down
+    // Fungsi pop-up hilang (scale down + fade)
     function hidePopup(img, callback) {
       img.style.opacity = '0';
-      img.style.transform = img.id === 'popup' 
-        ? 'translate(-50%, -50%) scale(0)' 
+      img.style.transform = img.id === 'popup'
+        ? 'translate(-50%, -50%) scale(0)'
         : 'scale(0)';
       setTimeout(() => {
         img.style.display = 'none';
         if(callback) callback();
-      }, 600); // sama dengan durasi transition
+      }, 600); // durasi sama dengan transition
     }
 
-    // Tampilkan popup utama saat load
+    // Tampilkan popup utama saat halaman dibuka
     window.onload = () => {
       showPopup(popup);
     };
 
     // Klik popup utama
     popup.addEventListener('click', () => {
-      // Hide dulu gambar1
+      // Pop-down gambar1
       hidePopup(popup, () => {
-        // Ganti ke gambar2 dan munculkan dengan pop-up
+        // Ganti ke gambar2
         popup.src = 'gambar2.png';
+        // Pop-up gambar2
         showPopup(popup);
-
         // Tampilkan gambar3 & gambar4 dengan pop-up
         showPopup(gambar3);
         showPopup(gambar4);
