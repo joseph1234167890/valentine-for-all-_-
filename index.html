@@ -28,33 +28,42 @@
       transform: translate(-50%, -50%) scale(0);
     }
 
+    /* Gambar3 & 4 lebih besar */
+    #gambar3, #gambar4 {
+      width: 150px; /* ukuran diperbesar */
+      display: none;
+    }
+
     #gambar3 {
       bottom: 20px;
       right: 20px;
-      width: 100px;
-      display: none;
     }
 
     #gambar4 {
       bottom: 20px;
       left: 20px;
-      width: 100px;
-      display: none;
     }
   </style>
 </head>
 <body>
 
+  <!-- Popup utama -->
   <img id="popup" class="popup-img" src="gambar1.png">
+
+  <!-- Gambar tambahan -->
   <img id="gambar3" class="popup-img" src="gambar3.png">
   <img id="gambar4" class="popup-img" src="gambar4.png">
+
+  <!-- Musik autoplay -->
+  <audio id="bg-music" src="Laufey - Valentine.mp3" autoplay loop></audio>
 
   <script>
     const popup = document.getElementById('popup');
     const gambar3 = document.getElementById('gambar3');
     const gambar4 = document.getElementById('gambar4');
+    const music = document.getElementById('bg-music');
 
-    // Fungsi pop-up muncul (scale + fade)
+    // Fungsi pop-up muncul
     function showPopup(img) {
       img.style.display = 'block';
       setTimeout(() => {
@@ -65,7 +74,7 @@
       }, 50);
     }
 
-    // Fungsi pop-up hilang (scale down + fade)
+    // Fungsi pop-up hilang
     function hidePopup(img, callback) {
       img.style.opacity = '0';
       img.style.transform = img.id === 'popup'
@@ -74,23 +83,23 @@
       setTimeout(() => {
         img.style.display = 'none';
         if(callback) callback();
-      }, 600); // durasi sama dengan transition
+      }, 600);
     }
 
-    // Tampilkan popup utama saat halaman dibuka
+    // Pop-up utama saat halaman dibuka
     window.onload = () => {
       showPopup(popup);
+      // Musik otomatis play (beberapa browser minta interaksi user)
+      music.play().catch(() => {});
     };
 
     // Klik popup utama
     popup.addEventListener('click', () => {
-      // Pop-down gambar1
       hidePopup(popup, () => {
-        // Ganti ke gambar2
+        // Ganti gambar1 → gambar2 dengan pop-up
         popup.src = 'gambar2.png';
-        // Pop-up gambar2
         showPopup(popup);
-        // Tampilkan gambar3 & gambar4 dengan pop-up
+        // Tampilkan gambar3 & 4 dengan pop-up
         showPopup(gambar3);
         showPopup(gambar4);
       });
