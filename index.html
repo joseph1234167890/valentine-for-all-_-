@@ -13,73 +13,75 @@
       font-family: sans-serif;
     }
 
-    /* Popup utama */
-    #popup {
+    /* Semua gambar popup */
+    .popup-img {
       position: fixed;
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.6s ease; /* fade + scale */
+      z-index: 100;
+    }
+
+    #popup {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0); /* awalnya kecil */
-      cursor: pointer;
-      z-index: 100;
-      opacity: 0;
-      transition: all 0.6s ease; /* fade + scale */
-    }
-
-    /* Gambar tambahan */
-    #gambar3, #gambar4 {
-      position: fixed;
-      width: 100px;
-      cursor: pointer;
-      display: none;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-      z-index: 100;
     }
 
     #gambar3 {
       bottom: 20px;
       right: 20px;
+      width: 100px; 
+      display: none; /* mulai hidden */
     }
 
     #gambar4 {
       bottom: 20px;
       left: 20px;
+      width: 100px;
+      display: none; /* mulai hidden */
     }
   </style>
 </head>
 <body>
 
   <!-- Popup utama -->
-  <img id="popup" src="gambar1.png">
+  <img id="popup" class="popup-img" src="gambar1.png">
 
   <!-- Gambar tambahan -->
-  <img id="gambar3" src="gambar3.png">
-  <img id="gambar4" src="gambar4.png">
+  <img id="gambar3" class="popup-img" src="gambar3.png">
+  <img id="gambar4" class="popup-img" src="gambar4.png">
 
   <script>
     const popup = document.getElementById('popup');
     const gambar3 = document.getElementById('gambar3');
     const gambar4 = document.getElementById('gambar4');
 
-    // Pop-up muncul dengan efek scale + fade
-    window.onload = () => {
+    // Fungsi pop-up muncul (scale + fade)
+    function showPopup(img) {
+      img.style.display = 'block';
       setTimeout(() => {
-        popup.style.transform = 'translate(-50%, -50%) scale(1)';
-        popup.style.opacity = '1';
-      }, 300); // delay kecil supaya keliatan smooth
+        img.style.opacity = '1';
+        img.style.transform = img.id === 'popup' 
+          ? 'translate(-50%, -50%) scale(1)'
+          : 'scale(1)';
+      }, 50); // delay kecil biar transisi jalan
+    }
+
+    // Saat halaman dibuka → tampilkan popup utama
+    window.onload = () => {
+      showPopup(popup);
     };
 
+    // Klik popup utama
     popup.addEventListener('click', () => {
       // Ganti gambar1 menjadi gambar2
       popup.src = 'gambar2.png';
 
-      // Tampilkan gambar3 & gambar4 dengan fade-in
-      gambar3.style.display = 'block';
-      gambar4.style.display = 'block';
-      setTimeout(() => {
-        gambar3.style.opacity = '1';
-        gambar4.style.opacity = '1';
-      }, 50);
+      // Tampilkan gambar3 & gambar4 dengan transisi pop-up
+      showPopup(gambar3);
+      showPopup(gambar4);
     });
   </script>
 </body>
