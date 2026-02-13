@@ -1,119 +1,67 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Happy Valentine</title>
+  <title>Popup Gambar Interaktif</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    #popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      z-index: 100;
+    }
 
-<style>
+    #gambar3, #gambar4 {
+      position: fixed;
+      width: 100px; /* Bisa disesuaikan */
+      cursor: pointer;
+      display: none; /* Awalnya hidden */
+      z-index: 100;
+    }
 
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-  background-image: url('background.png');
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-}
+    #gambar3 {
+      bottom: 20px;
+      right: 20px;
+    }
 
-/* Envelope Container */
-.envelope {
-  position: relative;
-  width: 320px;
-  height: 220px;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-/* Envelope Body */
-.envelope-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url('envelope-close.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: 2;
-}
-
-/* Open Envelope */
-.envelope.open .envelope-back {
-  background-image: url('envelope-open.png');
-}
-
-/* Letter */
-.letter {
-  position: absolute;
-  width: 260px;
-  height: 160px;
-  background: #fff0f6;
-  border-radius: 15px;
-  top: 40px;
-  left: 30px;
-  padding: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  text-align: center;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 0.6s;
-}
-
-.envelope.open .letter {
-  opacity: 1;
-  transform: translateY(-40px);
-}
-
-/* Heart */
-.heart {
-  font-size: 40px;
-}
-
-.message {
-  margin-top: 10px;
-  font-size: 15px;
-  color: #d63384;
-}
-
-.signature {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #ff4da6;
-}
-
-</style>
+    #gambar4 {
+      bottom: 20px;
+      left: 20px;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="envelope" onclick="openLetter(this)">
+  <!-- Pop-up utama -->
+  <img id="popup" src="gambar1.png">
 
-  <div class="envelope-back"></div>
+  <!-- Gambar tambahan -->
+  <img id="gambar3" src="gambar3.png">
+  <img id="gambar4" src="gambar4.png">
 
-  <div class="letter">
-    <div class="heart">💖</div>
-    <div class="message">
-      Happy Valentine's Day untuk semua orang!<br>
-      Semoga harimu penuh kebahagiaan dan cinta ❤️
-    </div>
-    <div class="signature">
-      - Dari Joseph -
-    </div>
-  </div>
+  <script>
+    const popup = document.getElementById('popup');
+    const gambar3 = document.getElementById('gambar3');
+    const gambar4 = document.getElementById('gambar4');
 
-</div>
+    popup.addEventListener('click', () => {
+      // Ganti gambar1 menjadi gambar2
+      popup.src = 'gambar2.png';
 
-<script>
-function openLetter(el) {
-  el.classList.toggle("open");
-}
-</script>
-
+      // Tampilkan gambar3 & gambar4
+      gambar3.style.display = 'block';
+      gambar4.style.display = 'block';
+    });
+  </script>
 </body>
 </html>
