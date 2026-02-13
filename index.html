@@ -1,121 +1,88 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Valentine Chocolate For Everyone</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      overflow: hidden;
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to top, #ff9aa2, #ffc3a0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      max-width: 400px;
-    }
+/* Card tengah */
+.card {
+  background: #fff;
+  padding: 50px 70px;
+  border-radius: 50%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  position: relative;
+}
 
-    h1 {
-      color: #ff4d6d;
-    }
+.card h2 {
+  margin: 0;
+  color: #ff6b81;
+  font-weight: 400;
+}
 
-    p {
-      color: #444;
-      margin-bottom: 25px;
-    }
+.card h1 {
+  margin: 10px 0 0 0;
+  color: #ff2e63;
+  font-size: 40px;
+}
 
-    button {
-      padding: 12px 25px;
-      border: none;
-      border-radius: 25px;
-      background: #ff4d6d;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+/* Hati melayang */
+.heart {
+  position: absolute;
+  font-size: 24px;
+  animation: float 6s linear infinite;
+}
 
-    button:hover {
-      background: #e63956;
-    }
-
-    .chocolate {
-      font-size: 60px;
-      margin-top: 20px;
-      display: none;
-      animation: pop 0.5s ease;
-    }
-
-    @keyframes pop {
-      0% { transform: scale(0); }
-      100% { transform: scale(1); }
-    }
-
-    .floating {
-      position: absolute;
-      font-size: 25px;
-      animation: float 6s linear infinite;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(-10vh);
-        opacity: 1;
-      }
-    }
-  </style>
+@keyframes float {
+  0% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-10vh);
+    opacity: 1;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="card">
-    <h1>Happy Valentine 🍫</h1>
-    <p>
-      Website ini dibuat untuk semua teman-temanku.
-      Ambil coklat virtual ini sebagai tanda persahabatan!
-    </p>
+<div class="card">
+  <h2>happy</h2>
+  <h1>Valentine's Day ❤️</h1>
+</div>
 
-    <button onclick="giveChocolate()">Ambil Coklat</button>
+<script>
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
 
-    <div class="chocolate" id="choco">🍫</div>
-  </div>
+  document.body.appendChild(heart);
 
-  <script>
-    function giveChocolate() {
-      document.getElementById("choco").style.display = "block";
-      createFloatingChocolate();
-    }
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
 
-    function createFloatingChocolate() {
-      for (let i = 0; i < 15; i++) {
-        const choco = document.createElement("div");
-        choco.innerHTML = "🍫";
-        choco.classList.add("floating");
-        choco.style.left = Math.random() * 100 + "vw";
-        choco.style.animationDuration = (Math.random() * 3 + 3) + "s";
-        document.body.appendChild(choco);
-
-        setTimeout(() => {
-          choco.remove();
-        }, 6000);
-      }
-    }
-  </script>
+setInterval(createHeart, 400);
+</script>
 
 </body>
 </html>
