@@ -3,118 +3,88 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Valentine Letter</title>
+<title>Happy Valentine</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+
 body {
   margin: 0;
   height: 100vh;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to top, #ff9aa2, #ffc0cb);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Poppins', sans-serif;
+  background-image: url('background.png');
+  background-size: cover;
+  background-position: center;
   overflow: hidden;
 }
 
-/* Awan */
-.cloud {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: moveCloud 60s linear infinite;
-}
-
-.cloud::before,
-.cloud::after {
-  content: '';
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-}
-
-.cloud::before {
-  width: 60px;
-  height: 60px;
-  top: -30px;
-  left: 10px;
-}
-
-.cloud::after {
-  width: 80px;
-  height: 80px;
-  top: -40px;
-  right: 10px;
-}
-
-@keyframes moveCloud {
-  from { transform: translateX(-200px); }
-  to { transform: translateX(110vw); }
-}
-
-/* Amplop */
+/* Envelope Container */
 .envelope {
-  width: 260px;
-  height: 180px;
-  background: #ff6b81;
   position: relative;
-  border-radius: 10px;
+  width: 320px;
+  height: 220px;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-.envelope::before {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 130px solid transparent;
-  border-right: 130px solid transparent;
-  border-bottom: 90px solid #ff8fa3;
-  top: -90px;
-  left: 0;
   transition: 0.5s;
 }
 
-/* Surat */
+/* Envelope Body */
+.envelope-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('envelope-close.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 2;
+}
+
+/* Open Envelope */
+.envelope.open .envelope-back {
+  background-image: url('envelope-open.png');
+}
+
+/* Letter */
 .letter {
   position: absolute;
-  width: 240px;
-  height: 260px;
-  background: white;
+  width: 260px;
+  height: 160px;
+  background: #fff0f6;
   border-radius: 15px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
+  top: 40px;
+  left: 30px;
   padding: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
   text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.6s;
 }
 
-.letter h2 {
-  color: #ff4d6d;
+.envelope.open .letter {
+  opacity: 1;
+  transform: translateY(-40px);
 }
 
-.letter p {
-  color: #444;
-  font-size: 14px;
-}
-
-/* Hati tengah */
+/* Heart */
 .heart {
   font-size: 40px;
-  margin: 10px 0;
 }
 
-/* Surat terbuka */
-.open .letter {
-  transform: translate(-50%, -50%) scale(1);
+.message {
+  margin-top: 10px;
+  font-size: 15px;
+  color: #d63384;
 }
 
-.open .envelope::before {
-  transform: rotateX(180deg);
+.signature {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #ff4da6;
 }
 
 </style>
@@ -122,28 +92,26 @@ body {
 
 <body>
 
-<!-- Awan -->
-<div class="cloud" style="width:120px;height:60px;top:20%;left:-150px;"></div>
-<div class="cloud" style="width:150px;height:70px;top:60%;left:-200px;animation-delay:20s;"></div>
+<div class="envelope" onclick="openLetter(this)">
 
-<!-- Amplop -->
-<div class="envelope" onclick="openLetter()"></div>
+  <div class="envelope-back"></div>
 
-<!-- Surat -->
-<div class="letter" id="letter">
-  <h2>Happy Valentine's Day</h2>
-  <div class="heart">❤️</div>
-  <p>
-    Website ini dibuat untuk semua teman-teman ku.
-    Semoga hari kalian penuh kebahagiaan, tawa, dan kenangan indah.
-    
-    Dari Joseph 💖
-  </p>
+  <div class="letter">
+    <div class="heart">💖</div>
+    <div class="message">
+      Happy Valentine's Day untuk semua orang!<br>
+      Semoga harimu penuh kebahagiaan dan cinta ❤️
+    </div>
+    <div class="signature">
+      - Dari Joseph -
+    </div>
+  </div>
+
 </div>
 
 <script>
-function openLetter() {
-  document.body.classList.toggle("open");
+function openLetter(el) {
+  el.classList.toggle("open");
 }
 </script>
 
