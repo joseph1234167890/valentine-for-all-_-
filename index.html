@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Happy Valentine Day</title>
+  <title>Popup Gambar Interaktif</title>
   <style>
     body {
       margin: 0;
@@ -10,8 +10,10 @@
       background-size: cover;
       height: 100vh;
       overflow: hidden;
+      font-family: sans-serif;
     }
 
+    /* Popup utama */
     #popup {
       position: fixed;
       top: 50%;
@@ -19,13 +21,18 @@
       transform: translate(-50%, -50%);
       cursor: pointer;
       z-index: 100;
+      opacity: 0;
+      transition: opacity 1s ease;
     }
 
+    /* Gambar tambahan */
     #gambar3, #gambar4 {
       position: fixed;
       width: 100px; /* Bisa disesuaikan */
       cursor: pointer;
       display: none; /* Awalnya hidden */
+      opacity: 0;
+      transition: opacity 1s ease;
       z-index: 100;
     }
 
@@ -42,7 +49,7 @@
 </head>
 <body>
 
-  <!-- Pop-up utama -->
+  <!-- Popup utama -->
   <img id="popup" src="gambar1.png">
 
   <!-- Gambar tambahan -->
@@ -54,13 +61,22 @@
     const gambar3 = document.getElementById('gambar3');
     const gambar4 = document.getElementById('gambar4');
 
+    // Fade-in popup saat halaman dibuka
+    window.onload = () => {
+      popup.style.opacity = 1;
+    };
+
     popup.addEventListener('click', () => {
       // Ganti gambar1 menjadi gambar2
       popup.src = 'gambar2.png';
 
-      // Tampilkan gambar3 & gambar4
+      // Tampilkan gambar3 & gambar4 dengan fade-in
       gambar3.style.display = 'block';
       gambar4.style.display = 'block';
+      setTimeout(() => {
+        gambar3.style.opacity = 1;
+        gambar4.style.opacity = 1;
+      }, 50); // delay kecil supaya transisi jalan
     });
   </script>
 </body>
