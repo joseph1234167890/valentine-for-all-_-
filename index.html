@@ -13,43 +13,39 @@
       font-family: sans-serif;
     }
 
-    /* Semua gambar popup */
     .popup-img {
       position: fixed;
       cursor: pointer;
       opacity: 0;
       transform: scale(0);
-      transition: all 0.6s ease; /* fade + scale */
+      transition: all 0.6s ease;
       z-index: 100;
     }
 
     #popup {
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0); /* awalnya kecil */
+      transform: translate(-50%, -50%) scale(0);
     }
 
     #gambar3 {
       bottom: 20px;
       right: 20px;
-      width: 100px; 
-      display: none; /* mulai hidden */
+      width: 100px;
+      display: none;
     }
 
     #gambar4 {
       bottom: 20px;
       left: 20px;
       width: 100px;
-      display: none; /* mulai hidden */
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- Popup utama -->
   <img id="popup" class="popup-img" src="gambar1.png">
-
-  <!-- Gambar tambahan -->
   <img id="gambar3" class="popup-img" src="gambar3.png">
   <img id="gambar4" class="popup-img" src="gambar4.png">
 
@@ -58,30 +54,46 @@
     const gambar3 = document.getElementById('gambar3');
     const gambar4 = document.getElementById('gambar4');
 
-    // Fungsi pop-up muncul (scale + fade)
+    // Fungsi untuk muncul dengan pop-up
     function showPopup(img) {
       img.style.display = 'block';
       setTimeout(() => {
         img.style.opacity = '1';
         img.style.transform = img.id === 'popup' 
-          ? 'translate(-50%, -50%) scale(1)'
+          ? 'translate(-50%, -50%) scale(1)' 
           : 'scale(1)';
-      }, 50); // delay kecil biar transisi jalan
+      }, 50);
     }
 
-    // Saat halaman dibuka → tampilkan popup utama
+    // Fungsi untuk hilang dengan pop-down
+    function hidePopup(img, callback) {
+      img.style.opacity = '0';
+      img.style.transform = img.id === 'popup' 
+        ? 'translate(-50%, -50%) scale(0)' 
+        : 'scale(0)';
+      setTimeout(() => {
+        img.style.display = 'none';
+        if(callback) callback();
+      }, 600); // sama dengan durasi transition
+    }
+
+    // Tampilkan popup utama saat load
     window.onload = () => {
       showPopup(popup);
     };
 
     // Klik popup utama
     popup.addEventListener('click', () => {
-      // Ganti gambar1 menjadi gambar2
-      popup.src = 'gambar2.png';
+      // Hide dulu gambar1
+      hidePopup(popup, () => {
+        // Ganti ke gambar2 dan munculkan dengan pop-up
+        popup.src = 'gambar2.png';
+        showPopup(popup);
 
-      // Tampilkan gambar3 & gambar4 dengan transisi pop-up
-      showPopup(gambar3);
-      showPopup(gambar4);
+        // Tampilkan gambar3 & gambar4 dengan pop-up
+        showPopup(gambar3);
+        showPopup(gambar4);
+      });
     });
   </script>
 </body>
