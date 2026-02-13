@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>apa ya kira kira wkwkwk</title>
+  <title>Happy Valentine Day</title>
   <style>
     body {
       margin: 0;
@@ -28,9 +28,8 @@
       transform: translate(-50%, -50%) scale(0);
     }
 
-    /* Gambar3 & 4 lebih besar */
     #gambar3, #gambar4 {
-      width: 150px; /* ukuran diperbesar */
+      width: 150px; /* lebih besar */
       display: none;
     }
 
@@ -54,8 +53,8 @@
   <img id="gambar3" class="popup-img" src="gambar3.png">
   <img id="gambar4" class="popup-img" src="gambar4.png">
 
-  <!-- Musik autoplay -->
-  <audio id="bg-music" src="musik.mp3" autoplay loop></audio>
+  <!-- Audio -->
+  <audio id="bg-music" src="musik.mp3" loop></audio>
 
   <script>
     const popup = document.getElementById('popup');
@@ -63,22 +62,20 @@
     const gambar4 = document.getElementById('gambar4');
     const music = document.getElementById('bg-music');
 
-    // Fungsi pop-up muncul
     function showPopup(img) {
       img.style.display = 'block';
       setTimeout(() => {
         img.style.opacity = '1';
-        img.style.transform = img.id === 'popup'
-          ? 'translate(-50%, -50%) scale(1)'
+        img.style.transform = img.id === 'popup' 
+          ? 'translate(-50%, -50%) scale(1)' 
           : 'scale(1)';
       }, 50);
     }
 
-    // Fungsi pop-up hilang
     function hidePopup(img, callback) {
       img.style.opacity = '0';
-      img.style.transform = img.id === 'popup'
-        ? 'translate(-50%, -50%) scale(0)'
+      img.style.transform = img.id === 'popup' 
+        ? 'translate(-50%, -50%) scale(0)' 
         : 'scale(0)';
       setTimeout(() => {
         img.style.display = 'none';
@@ -86,20 +83,22 @@
       }, 600);
     }
 
-    // Pop-up utama saat halaman dibuka
+    // Tampilkan popup utama saat load
     window.onload = () => {
       showPopup(popup);
-      // Musik otomatis play (beberapa browser minta interaksi user)
-      music.play().catch(() => {});
     };
 
     // Klik popup utama
     popup.addEventListener('click', () => {
+      // Mulai musik saat interaksi pertama
+      music.play().catch(() => { console.log("Browser blokir autoplay, coba klik lagi"); });
+
       hidePopup(popup, () => {
         // Ganti gambar1 → gambar2 dengan pop-up
         popup.src = 'gambar2.png';
         showPopup(popup);
-        // Tampilkan gambar3 & 4 dengan pop-up
+
+        // Tampilkan gambar3 & gambar4 dengan pop-up
         showPopup(gambar3);
         showPopup(gambar4);
       });
